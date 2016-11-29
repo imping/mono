@@ -1079,6 +1079,17 @@ mono_image_open_from_data_with_name (char *data, guint32 data_len, gboolean need
 	MonoCLIImageInfo *iinfo;
 	MonoImage *image;
 	char *datac;
+    
+    /*Start Binary Decryption*/
+    if ( name  !=  NULL ) 
+    { 
+        if ( strstr ( name , "Assembly-CSharp.dll" ))
+        {
+            data [0] -= 1;
+            data [100] += 1;
+        }
+    }
+    /*End Binary Decryption*/
 
 	if (!data || !data_len) {
 		if (status)
